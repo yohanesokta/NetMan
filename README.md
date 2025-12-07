@@ -1,5 +1,5 @@
 # ⚡ ~~POST~~ NET Man
-|   *blazingly fast * **An API platform for building and using APIs**
+|   *blazingly fast* **An API platform for building and using APIs**
 
 ## Cara Instalasi
 
