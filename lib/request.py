@@ -7,8 +7,9 @@ class request_worker(QThread):
     method = ""
     headers = None
     body = None
+    body_type = None
 
     def run(self):
         adapter = HttpAdapter()
-        result = adapter.fetch(self.url, self.method, self.headers, self.body)
+        result = adapter.fetch(self.url, self.method, self.headers, self.body, self.body_type)
         self.progress.emit(result)

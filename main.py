@@ -64,7 +64,21 @@ class MainWindow(QMainWindow, Ui_NETman):
         method = self.inputMethod.currentText()
         url = self.inputUrl.text()
         headers = to_dict(get_table_data(self.headersTableWidget))
-        body = to_dict(get_table_data(self.bodyTableWidget))
+        
+        body = None
+        body_type = None
+
+        # Check which body type is selected
+        if self.tabWidget_2.currentIndex() == 0: # Form Data
+            body = to_dict(get_table_data(self.bodyTableWidget))
+            body_type = 'form'
+        elif self.tabWidget_2.currentIndex() == 1: # Raw JSON
+            try:
+                body = json.loads(self.textEdit.toPlainText())
+                body_type = 'json'
+            except json.JSONDecodeError:
+                self.responseText.setPlainText("Invalid JSON in body")
+                return
 
         if method and url:
             self.sendButton.setDisabled(True)
@@ -73,7 +87,9 @@ class MainWindow(QMainWindow, Ui_NETman):
             self.request_worker.url = url
             self.request_worker.headers = headers
             self.request_worker.body = body
+            self.request_worker.body_type = body_type
             self.request_worker.start()
+
 
 
     def RequestParse(self,result):
