@@ -5,7 +5,7 @@ from lib.formatter import JsonHighlighter
 from lib.request import request_worker
 import json
 from view.main_window import Ui_NETman
-from lib.controllers import get_table_data, queryAppend
+from lib.controllers import get_table_data, queryAppend, to_dict
 import qdarktheme
 
 
@@ -60,25 +60,32 @@ class MainWindow(QMainWindow, Ui_NETman):
         new_url = queryAppend(self.inputUrl.text(),list_params)
         self.inputUrl.setText(new_url)
 
-    def RequestAction(
-        self,
-    ):
+    def RequestAction(self):
         method = self.inputMethod.currentText()
         url = self.inputUrl.text()
-        print(get_table_data(self.paramsTableWidget))
+        headers = to_dict(get_table_data(self.headersTableWidget))
+        body = to_dict(get_table_data(self.bodyTableWidget))
+
         if method and url:
             self.sendButton.setDisabled(True)
             self.responseText.setPlainText('Waiting Response Server!')
+            self.request_worker.method = method
             self.request_worker.url = url
+            self.request_worker.headers = headers
+            self.request_worker.body = body
             self.request_worker.start()
-
 
 
     def RequestParse(self,result):
         self.sendButton.setDisabled(False)
-        self.responseText.setPlainText(
-            json.dumps(result, indent=4, ensure_ascii=False)
-        )
+        if isinstance(result, dict):
+            self.responseText.setPlainText(
+                json.dumps(result, indent=4, ensure_ascii=False)
+            )
+        elif isinstance(result, list):
+            self.responseText.setPlainText(str(result))
+        else:
+            self.responseText.setPlainText(result)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

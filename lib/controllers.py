@@ -24,3 +24,10 @@ def get_table_data(table):
         if (row_data != []):
             data.append(row_data)
     return data
+
+def to_dict(data):
+    result = {}
+    for item in data:
+        if item[0]:
+            result[item[0]] = item[1]
+    return result

@@ -1,14 +1,14 @@
-import requests
 from PyQt6.QtCore import QThread, pyqtSignal
+from lib.http_adapter import HttpAdapter
 
 class request_worker(QThread):
-    progress = pyqtSignal(list)
+    progress = pyqtSignal(object)
     url = ""
     method = ""
+    headers = None
+    body = None
+
     def run(self):
-        try:
-            result = requests.get(self.url)
-            self.progress.emit(result.json())
-        except Exception as error:
-            print("Error : ", error)
-            self.progress.emit([{"Errors":"Failed Request","Errors Details" : str(error.__str__())}])
+        adapter = HttpAdapter()
+        result = adapter.fetch(self.url, self.method, self.headers, self.body)
+        self.progress.emit(result)
