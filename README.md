@@ -1,5 +1,5 @@
 # ⚡ ~~POST~~ NET Man
-|   *sangat cepat* **KLIEN API**
+|   *blazingly fast * **An API platform for building and using APIs**
 
 ## Cara Instalasi
 
