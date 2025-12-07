@@ -149,7 +149,7 @@ class Ui_RequestWidget(object):
         self.retranslateUi(RequestWidget)
         self.tabWidget.setCurrentIndex(1)
         self.tabWidget_2.setCurrentIndex(0)
-        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(RequestWidget)
 
     def retranslateUi(self, RequestWidget):

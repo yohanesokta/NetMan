@@ -8,19 +8,19 @@ class JsonHighlighter(QSyntaxHighlighter):
         self.rules = []
 
         self.format_key = QTextCharFormat()
-        self.format_key.setForeground(QColor("#2f00ff"))
+        self.format_key.setForeground(QColor("#66d9ef")) # Cyan for keys
 
         self.format_string = QTextCharFormat()
-        self.format_string.setForeground(QColor("#178229"))
+        self.format_string.setForeground(QColor("#a6e22e")) # Bright green for strings
 
         self.format_number = QTextCharFormat()
-        self.format_number.setForeground(QColor("#333333"))
+        self.format_number.setForeground(QColor("#fd971f")) # Orange for numbers
 
         self.format_boolean = QTextCharFormat()
-        self.format_boolean.setForeground(QColor("#05008f"))
+        self.format_boolean.setForeground(QColor("#ae81ff")) # Purple for booleans
 
         self.format_null = QTextCharFormat()
-        self.format_null.setForeground(QColor("#808080"))
+        self.format_null.setForeground(QColor("#75715e")) # Gray for null
 
         self.rules.append(
             (QRegularExpression(r"\".*?\"(?=\s*:)"), self.format_key)

@@ -93,11 +93,13 @@ class RequestWidget(QWidget, Ui_RequestWidget):
     def RequestParse(self,result):
         self.sendButton.setDisabled(False)
         if isinstance(result, dict):
-            self.responseText.setPlainText(
-                json.dumps(result, indent=4, ensure_ascii=False)
-            )
+            json_text = json.dumps(result, indent=4, ensure_ascii=False)
+            self.responseText.setPlainText(json_text)
+            self.responseText_3.setPlainText(json_text)
         elif isinstance(result, list):
             self.responseText.setPlainText(str(result))
+            self.responseText_3.setPlainText(str(result))
         else:
             self.responseText.setPlainText(result)
+            self.responseText_3.setPlainText(result)
 
