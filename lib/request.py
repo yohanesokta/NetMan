@@ -3,11 +3,14 @@ from lib.http_adapter import HttpAdapter
 
 class request_worker(QThread):
     progress = pyqtSignal(object)
-    url = ""
-    method = ""
-    headers = None
-    body = None
-    body_type = None
+
+    def __init__(self):
+        super().__init__()
+        self.url = ""
+        self.method = ""
+        self.headers = None
+        self.body = None
+        self.body_type = None
 
     def run(self):
         adapter = HttpAdapter()
