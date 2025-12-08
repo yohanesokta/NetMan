@@ -1,6 +1,12 @@
 import requests
+from abc import ABC, abstractmethod
 
-class HttpAdapter:
+class IHttpClient(ABC):
+    @abstractmethod
+    def fetch(self, url, method='GET', headers=None, body=None, body_type='json'):
+        pass
+    
+class HttpAdapter(IHttpClient):
     def __init__(self):
         self.request = requests
 

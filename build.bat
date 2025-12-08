@@ -1,0 +1,1 @@
+python -m nuitka --onefile --windows-console-mode=disable --follow-imports --include-data-dir=./=./ --enable-plugin=pyqt6 --output-dir=build --windows-icon-from-ico=main.ico --lto=yes main.py
